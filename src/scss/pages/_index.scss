@@ -1,4 +1,84 @@
-.main__list {
-  padding-left: 2rem;
-  padding-bottom: 20px;
+:root {
+  padding: 0;
+  margin: 0;
 }
+  body{
+    background-color: rgb(163, 0, 70);
+    color: rgb(232, 240, 3);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+// INDEX: Header
+header {
+  letter-spacing: 3px;
+  margin-top: 10px;
+}
+  .input_anime {
+    width: 225px;
+    height: 30px;
+    border-radius: 20px;
+    margin: 12px;
+    text-align: center;
+  }
+
+  .btn {
+    background-color: rgb(235, 217, 16);
+    color: rgb(163, 0, 70);
+    width: 90px;
+    height: 30px;
+    border-radius: 20px;
+    font-weight: bold ;
+    font-size: 12px;
+  }
+
+  // INDEX: Main
+main  {
+  background-color: orange;
+  color: rgb(163, 0, 70);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 15px;
+  border-radius: 10px;
+  margin-block: 15px;
+  padding: 10px;
+}
+  .img {
+    background-color: grey;
+    height: 200px;
+    width: 120px;
+  }
+  .name {
+    font-size: 12px;
+    font-weight: 450;
+    margin-top: 3px;
+    max-width: 120px;
+    height: 30px;
+  }
+
+  // INDEX: Footer
+footer {
+  background-color: rgb(235, 217, 16);
+  color: rgb(163, 0, 70);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  height: 50px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+  .marca {
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
