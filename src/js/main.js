@@ -9,7 +9,7 @@ const album = document.querySelector(".album");
 let card;
 // const cardFav = document.querySelector(".card_fav");
 
-const data = [
+const dataDemo = [
     {
     mal_id: 20,
     url: "https://myanimelist.net/anime/20/Naruto",
@@ -44,7 +44,7 @@ const data = [
         large_image_url: "https://cdn.myanimelist.net/images/anime/1141/142503l.webp"
         }
     },
-    title: "Naruto 3",
+    title: "Naruto 2",
     title_english: "Naruto",
     title_japanese: "ナルト",
     },
@@ -63,7 +63,7 @@ const data = [
         large_image_url: "https://cdn.myanimelist.net/images/anime/1141/142503l.webp"
         }
     },
-    title: "Naruto",
+    title: "Naruto 3",
     title_english: "Naruto",
     title_japanese: "ナルト",
     },
@@ -89,58 +89,84 @@ const data = [
 ];
 
 // FUNCTION
+// function printCard(){
+//     let cards = " ";
+//     for(let i = 0; i < dataDemo.length; i++){
+//         cards += `
+//             <ul class="card">
+//                 <div class="name">${dataDemo[i].title}</div>
+//                 <div class="img">
+//                     <img src="${dataDemo[i].images.webp.image_url}"
+//                     alt="Foto del anime: ${dataDemo[i].title}">
+//                 </div>
+//             </ul>`;            
+//         }    
+//     album.innerHTML = cards;
+//     return cards;
+// };
+
 function printCard(){
     let cards = " ";
-    for(let i = 0; i < data.length; i++){
+    for(let i = 0; i < 25; i++){
         cards += `
             <ul class="card">
-                <div class="name">${data[i].title}</div>
+                <div class="name">${listAnimes[i].title}</div>
                 <div class="img">
-                    <img src="${data[i].images.webp.image_url}"
-                    alt="Foto del anime: ${data[i].title}">
+                    <img src="${listAnimes[i].images.webp.image_url}"
+                    alt="Foto del anime: ${listAnimes[i].title}">
                 </div>
             </ul>`;            
         }    
     album.innerHTML = cards;
+    return cards;
 };
 
 // EVENT
+// Click al btn y busca el anime escrito:
 btnSearch.addEventListener ("click", () =>{
-    console.log("Clickaste en BUSCAR");
     let searchAnime = inputAnime.value;
-    console.log("Anime buscado: " + searchAnime);
     album.innerHTML = searchAnime;
-    printCard();
-    card = document.querySelector(".card");
+    console.log("Clickaste en BUSCAR");
+    console.log("Anime buscado: " + searchAnime);
 });
 
+// Click al btn y resentea la búsqueda:
 btnReset.addEventListener ("click", () =>{
     console.log("Clickaste en RESET");
     album.innerHTML = " ";
     inputAnime.value = " ";
 });
 
-// card.addEventListener ("click", () =>{
-//     console.log("Clickaste el cromo");
-//     card.classList.toggle("card_fav");
-// });
-
-album.addEventListener ("click", (event) =>{
-    console.log(event.target);
-    if (event.target.classList.contains("card")){
-        console.log("Clickaste el cromo");
-        card.classList.toggle("card_fav");
-    }
+// Click al cromo y añade a favoritos:
+album.addEventListener("click", (event) => {
+  const card = event.target.closest(".card");
+  if (card) {
+    console.log("Has clickado un cromo");
+    card.classList.toggle("card_fav");
+  }
 });
 
 // PROBANDO MOVIDAS
-function renderAnime() {
-    let dataAnime = " ";
-}
-
 fetch('https://api.jikan.moe/v4/anime?q=naruto')
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        console.log(data.data[5].mal_id);
+        console.log(data.data[10].title);
+        console.log(data.data[15].images.jpg.image_url);
+        let listAnimes = data.data;
+        console.log(listAnimes);
+        let cards = " ";
+    for(let i = 0; i < 25; i++){
+        cards += `
+            <ul class="card">
+                <div class="name">${listAnimes[i].title}</div>
+                <div class="img">
+                    <img src="${listAnimes[i].images.webp.image_url}"
+                    alt="Foto del anime: ${listAnimes[i].title}">
+                </div>
+            </ul>`;            
+        }    
+    album.innerHTML = cards;
     });
-renderAnime();
+
+// printCard();
