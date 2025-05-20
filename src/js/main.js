@@ -1,11 +1,13 @@
 'use strict';
 console.log('JS funcionando');
 
-// CONST
+// DATA
 const btnSearch = document.querySelector(".btn_buscar");
 const btnReset = document.querySelector(".btn_reset");
 const inputAnime = document.querySelector(".input_anime");
 const album = document.querySelector(".album");
+let card = document.querySelector(".card");
+const cardFav = document.querySelector(".card_fav");
 
 const data = {
 mal_id: 20,
@@ -28,19 +30,16 @@ title_japanese: "ナルト",
 };
 
 // FUNCTION
-// album.innerHTML = `
-//     <ul class="card">
-//         <div class="name">K-on! Temporada 2 HTT</div>
-//         <div class="img"></div>
-//     </ul>`;
-album.innerHTML = `
-    <ul class="card">
-        <div class="name">${data.title}</div>
-        <div class="img">
-            <img src="${data.images.webp.image_url}"
-            alt="Foto del anime: ${data.title}">
-        </div>
-    </ul>`;
+function printCard(){
+    album.innerHTML = `
+        <ul class="card">
+            <div class="name">${data.title}</div>
+            <div class="img">
+                <img src="${data.images.webp.image_url}"
+                alt="Foto del anime: ${data.title}">
+            </div>
+        </ul>`;
+};
 
 // EVENT
 btnSearch.addEventListener ("click", () =>{
@@ -48,6 +47,7 @@ btnSearch.addEventListener ("click", () =>{
     let searchAnime = inputAnime.value;
     console.log("Anime buscado: " + searchAnime);
     album.innerHTML = searchAnime;
+    printCard();
 });
 
 btnReset.addEventListener ("click", () =>{
@@ -55,3 +55,18 @@ btnReset.addEventListener ("click", () =>{
     album.innerHTML = " ";
     inputAnime.value = " ";
 });
+
+album.addEventListener ("click", () =>{
+    console.log("Clickaste el cromo");
+    album.classList.toggle("card_fav");
+});
+
+// PROBANDO MOVIDAS
+function renderAnime() {
+    let dataAnime = " ";
+}
+
+fetch('https://api.jikan.moe/v4/anime?q=naruto')
+    .then()
+
+renderAnime();
