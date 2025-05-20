@@ -7,6 +7,7 @@ const btnSearch = document.querySelector(".btn_buscar");
 const btnReset = document.querySelector(".btn_reset");
 const inputAnime = document.querySelector(".input_anime");
 const album = document.querySelector(".album");
+const favorites = document.querySelector(".favorites");
 let writeAnime;
 let card;
 let listAnimes;
@@ -29,6 +30,20 @@ function printCard(searchAnimes){
        album.innerHTML = cards;
 }
 
+function printCardFav(searchAnimesFavs){
+   console.log(searchAnimesFavs);
+       let cards = " ";
+       for(let i = 0; i < searchAnimesFavs.length; i++){
+            cards += `
+                <ul class="card_favorites">
+                    <div class="img_fav">
+                        <img src="${searchAnimesFav[i].images.webp.image_url}"
+                        alt="Foto del anime: ${searchAnimesFavs[i].title}">
+                    <div class="name_fav">${searchAnimes[i].title}</div>
+                </ul>`;            
+           }    
+       favorites.innerHTML = cards;
+}
 
 // EVENT
 // Click al btn y busca el anime escrito:
