@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
     padding: 0;
     margin: 0;
     margin-bottom: 50px;
@@ -16,7 +17,7 @@
 // INDEX: Header
 header {
   letter-spacing: 3px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
   .input_anime {
     width: 225px;
@@ -25,7 +26,6 @@ header {
     margin: 12px;
     text-align: center;
   }
-
   .btn {
     background-color: rgb(235, 217, 16);
     color: rgb(163, 0, 70);
@@ -34,6 +34,7 @@ header {
     border-radius: 20px;
     font-weight: bold ;
     font-size: 12px;
+    cursor: pointer;
   }
 
   // INDEX: Main
@@ -43,22 +44,22 @@ main  {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  // min-height: 270px;
+  justify-content: center;
+  max-width: 1250px;
   margin: 15px;
   border-radius: 10px;
   margin-block: 15px;
   padding: 10px;
   font-size: 12px;
   font-weight: 450;
+  gap: 15px;
 }
-  .album{
-    gap: 12px;
-  }
     .card {
       background-color: orange;
+      box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.368);
       padding: 6px;
       border-radius: 3px;
+      cursor: pointer;
     }
       .name {
          display: flex;
