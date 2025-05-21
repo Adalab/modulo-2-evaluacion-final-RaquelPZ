@@ -52,7 +52,7 @@ main{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1250px;
+    // max-width: 1250px;
     border-radius: 10px;
     gap: 15px;
     margin-bottom: 75px;
@@ -118,7 +118,7 @@ main{
       }
       .name_fav{
         line-height: 1.3;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 450;
         max-width: 95px;
         text-align: left;
@@ -129,7 +129,7 @@ main{
 footer {
   background-color: rgb(224, 207, 16);
   color: rgb(163, 0, 70);
-  position: fixed;
+  position: static;
   bottom: 0;
   width: 100%;
   padding: 10px;

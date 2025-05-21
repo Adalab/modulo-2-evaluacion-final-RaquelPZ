@@ -12,6 +12,7 @@ let writeAnime;
 let card;
 let listAnimes;
 let nameAnime;
+let cardsFavs = [];
 
 // FUNCTION
 function printCard(searchAnimes){
@@ -30,19 +31,19 @@ function printCard(searchAnimes){
        album.innerHTML = cards;
 }
 
-function printCardFav(searchAnimesFavs){
-   console.log(searchAnimesFavs);
-       let cards = " ";
+function printCardFav(searchAnimesFavs){ 
+    
        for(let i = 0; i < searchAnimesFavs.length; i++){
-            cards += `
+            cardsFavs += `
                 <ul class="card_favorites">
                     <div class="img_fav">
-                        <img src="${searchAnimesFav[i].images.webp.image_url}"
+                        <img src="${searchAnimesFavs[i].images.webp.image_url}"
                         alt="Foto del anime: ${searchAnimesFavs[i].title}">
-                    <div class="name_fav">${searchAnimes[i].title}</div>
+                    <div class="name_fav">${searchAnimesFavs[i].title}</div>
                 </ul>`;            
            }    
-       favorites.innerHTML = cards;
+           console.log(cardsFavs);
+       favorites.innerHTML = cardsFavs;
 }
 
 // EVENT
@@ -50,8 +51,6 @@ function printCardFav(searchAnimesFavs){
 btnSearch.addEventListener ("click", () =>{
     writeAnime = inputAnime.value;
     console.log("Clickaste en BUSCAR: " + writeAnime);
-    console.log(nameAnime);
-    console.log(listAnimes);
     let filterAnime = listAnimes.filter (n => n.title.includes(writeAnime));
     console.log(filterAnime);
     printCard(filterAnime);
@@ -72,16 +71,39 @@ album.addEventListener("click", (event) => {
     console.log("Has clickado un cromo");
     card.classList.toggle("card_fav");
   }
+// if (card.classList.contains("card_fav")) {
+//       if (!cardsFavs.includes(card)) {
+//         cardsFavs.push(card);
+//       }
+//     } else {
+//       // Si se desmarca, la quitamos del array
+//       const index = cardsFavs.indexOf(card);
+//       if (index !== -1) {
+//         cardsFavs.splice(index, 1);
+//       }
+//     }
+
+// Probando cosas--------
+
+    const animeTitleElement = card.querySelector('.name_fav');
+    const animeTitle = animeTitleElement.textContent;
+    const animeData = listAnimes.find(anime => anime.title === animeTitle);
+    animesFavs.push(animeData);
+
+
+    printCardFav(cardsFavs);
+
 });
 
-// PROBANDO MOVIDAS
+// PROBANDO LA API MAGICA
 fetch('https://api.jikan.moe/v4/anime?q=naruto')
     .then(res => res.json())
     .then(data => {
         console.log(data.data[10].title);;
         listAnimes = data.data;
         printCard(listAnimes);
-        nameAnime = data.data.map(item => item.title);
+        // nameAnime = data.data.map(item => item.title);
+        printCardFav(listAnimes);
 
      
     });
