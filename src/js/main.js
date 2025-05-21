@@ -13,6 +13,7 @@ let card;
 let listAnimes;
 let nameAnime;
 let cardsFavs = [];
+let listAnimeFavs = [];
 
 // FUNCTION
 function printCard(searchAnimes){
@@ -47,16 +48,16 @@ function printCardFav(searchAnimesFavs){
 }
 
 // EVENT
-// Click al btn y busca el anime escrito:
+// Click on the btn and search for the written anime:
 btnSearch.addEventListener ("click", () =>{
-    writeAnime = inputAnime.value;
+    writeAnime = inputAnime.value;// Click al btn y resentea la búsqueda:// Click al cromo y añade a favoritos:
     console.log("Clickaste en BUSCAR: " + writeAnime);
     let filterAnime = listAnimes.filter (n => n.title.includes(writeAnime));
     console.log(filterAnime);
     printCard(filterAnime);
 });
 
-// Click al btn y resentea la búsqueda:
+// Click the button and re-enter the search:
 btnReset.addEventListener ("click", () =>{
     console.log("Clickaste en RESET");
     printCard(listAnimes);
@@ -64,7 +65,7 @@ btnReset.addEventListener ("click", () =>{
     
 });
 
-// Click al cromo y añade a favoritos:
+// Click on the chrome and add to favorites:
 album.addEventListener("click", (event) => {
   const card = event.target.closest(".card");
   if (card) {
@@ -88,14 +89,14 @@ album.addEventListener("click", (event) => {
     const animeTitleElement = card.querySelector('.name_fav');
     const animeTitle = animeTitleElement.textContent;
     const animeData = listAnimes.find(anime => anime.title === animeTitle);
-    animesFavs.push(animeData);
+    listAnimesFavs.push(animeData);
 
 
-    printCardFav(cardsFavs);
+    printCardFav(listAnimeFavs);
 
 });
 
-// PROBANDO LA API MAGICA
+// API
 fetch('https://api.jikan.moe/v4/anime?q=naruto')
     .then(res => res.json())
     .then(data => {
@@ -103,7 +104,7 @@ fetch('https://api.jikan.moe/v4/anime?q=naruto')
         listAnimes = data.data;
         printCard(listAnimes);
         // nameAnime = data.data.map(item => item.title);
-        printCardFav(listAnimes);
+        printCardFav(listAnimeFavs);
 
      
     });
