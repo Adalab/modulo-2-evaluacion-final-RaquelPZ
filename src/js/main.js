@@ -1,6 +1,4 @@
 'use strict';
-console.log('JS funcionando');
-// ev.preventDefault();
 
 // DATA
 const btnSearch = document.querySelector(".btn_buscar");
@@ -16,8 +14,8 @@ let cardsFavs = [];
 let listAnimeFavs = [];
 
 // FUNCTION
+// Paint the cards with html format
 function printCard(searchAnimes){
-   console.log(searchAnimes);
        let cards = " ";
        for(let i = 0; i < searchAnimes.length; i++){
            cards += `
@@ -32,14 +30,9 @@ function printCard(searchAnimes){
        album.innerHTML = cards;
 }
 
+// Paint the favorite cards with html format:
 function printCardFav(searchAnimesFavs){ 
-    console.log(searchAnimesFavs.length + "rafa");
-    
        for(let i = 0; i < searchAnimesFavs.length; i++){
-        console.log(JSON.stringify(searchAnimesFavs[i]) + "rafa2");
-        console.log(searchAnimesFavs[i].images + "iamgen");
-        console.log(searchAnimesFavs[i].images.webp + "we");
-        console.log(searchAnimesFavs[i].images.webp.image_url + "rurl");
             cardsFavs += `
                 <ul class="card_favorites">
                     <div class="img_fav">
@@ -48,70 +41,34 @@ function printCardFav(searchAnimesFavs){
                     <div class="name_fav">${searchAnimesFavs[i].title}</div>
                 </ul>`;            
            }    
-           console.log(cardsFavs);
        favorites.innerHTML = cardsFavs;
-
 }
 
 // EVENT
 // Click on the btn and search for the written anime:
-btnSearch.addEventListener ("click", () =>{
-    writeAnime = inputAnime.value;// Click al btn y resentea la búsqueda:// Click al cromo y añade a favoritos:
-    console.log("Clickaste en BUSCAR: " + writeAnime);
+btnSearch.addEventListener ("click", (ev) =>{
+    ev.preventDefault();
+    writeAnime = inputAnime.value;
     let filterAnime = listAnimes.filter (n => n.title.includes(writeAnime));
-    console.log(filterAnime);
     printCard(filterAnime);
 });
 
 // Click the button and re-enter the search:
-btnReset.addEventListener ("click", () =>{
-    console.log("Clickaste en RESET");
+btnReset.addEventListener ("click", (ev) =>{
+    ev.preventDefault();
     printCard(listAnimes);
     inputAnime.value = " ";
-    
 });
 
 // Click on the chrome and add to favorites:
 album.addEventListener("click", (event) => {
-  const card = event.target.closest(".card");
-  if (card) {
-    console.log("Has clickado un cromo");
-    card.classList.toggle("card_fav");
-  }
+    event.preventDefault();
+    const card = event.target.closest(".card");
+    if (card) {
+        card.classList.toggle("card_fav");
+    }
 
-listAnimeFavs.push(card);
-console.log("hola" + card);
-
-// console.log("primero" + listAnimeFavs);
-//     listAnimeFavs = document.querySelectorAll('.card_fav');
-//     console.log("segundo" + listAnimeFavs.length);
-//     listAnimeFavs.forEach(animeFav => {
-//         console.log("FAV" + (animeFav));
-//         console.log("FAV" + JSON.stringify(animeFav));
-//     });
-
-
-// if (card.classList.contains("card_fav")) {
-//       if (!cardsFavs.includes(card)) {
-//         cardsFavs.push(card);
-//       }
-//     } else {
-//       // Si se desmarca, la quitamos del array
-//       const index = cardsFavs.indexOf(card);
-//       if (index !== -1) {
-//         cardsFavs.splice(index, 1);
-//       }
-//     }
-
-// Probando cosas--------
-
-    // const animeTitleElement = card.querySelector('.name_fav');
-    // const animeTitle = animeTitleElement.textContent;
-    // const animeData = listAnimes.find(anime => anime.title === animeTitle);
-    // listAnimesFavs.push(animeData);
-
-    
-
+    listAnimeFavs.push(card);
     printCardFav(listAnimeFavs);
 
 });
@@ -120,11 +77,7 @@ console.log("hola" + card);
 fetch('https://api.jikan.moe/v4/anime?q=naruto')
     .then(res => res.json())
     .then(data => {
-        console.log(data.data[10].title);;
         listAnimes = data.data;
         printCard(listAnimes);
-        // nameAnime = data.data.map(item => item.title);
         printCardFav(listAnimeFavs);
-
-     
     });
